@@ -1,0 +1,5 @@
+{
+  "name": "ocp-console-login",
+  "version": "0.1.0",
+  "description": "Skill: log into a self-signed OpenShift web console from the Playwright MCP browser"
+}
