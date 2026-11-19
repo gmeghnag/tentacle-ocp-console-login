@@ -10,7 +10,7 @@ description: >
   CLI or API login (kubeconfig) or non-browser automation.
 metadata:
   author: gmeghnag
-  version: "1.2"
+  version: "1.3"
 ---
 
 # OCP web console login (browser)
@@ -19,6 +19,23 @@ Authenticated browser access to an OpenShift web console whose certificate is
 **self-signed**, driven by the Playwright MCP tools. One idea: the default MCP
 context does NOT ignore TLS errors, so the flow is always "get past every cert
 interstitial, pick the IdP the credentials belong to, log in".
+
+## Requirement: Playwright MCP
+
+This skill needs the **Playwright MCP server** — its tools are named
+`mcp__playwright__browser_*` (`browser_navigate`, `browser_run_code_unsafe`, …).
+Check that they are among your tools BEFORE anything else. If they are not, do
+not try another way (no `curl`, no other browser): stop, tell the user the skill
+needs Playwright MCP, and suggest installing it by adding it to `mcpServers` in
+the tentacle config (`~/.config/tentacle/config.jsonc`), then restarting tentacle:
+
+```jsonc
+"mcpServers": {
+  "playwright": { "command": "npx", "args": ["@playwright/mcp@latest"] }
+}
+```
+
+(It needs Node.js / `npx`; the first run downloads the package and a browser.)
 
 ## Credentials
 
